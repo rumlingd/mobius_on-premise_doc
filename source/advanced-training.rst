@@ -1,15 +1,14 @@
-Advanced: Training on Device
+Advanced: Customized Training
 =================================
 
 In order to use the customisation module for adding keywords and/or styles, it needs to be trained with handpicked data.
 
 Steps for training:
 
-* features have to be extracted for a list of positive and a list of negative images
-* pass extracted features to train function
+* add positive and negative examples
+* run training
 * repeat training for fine-tuning in order to improve results
 * test trained customisation module using the predict function
-* save
 
 .. image::
    data/PA2.png
@@ -17,115 +16,95 @@ Steps for training:
    :width: 600 px
    :align: center
 
-Feature extraction
--------------------
+Adding positive and negative samples
+------------------------------------
 
-Training requires a first step which is feature extraction. Features are :java:`float[]`
-that are extracted from every image (Bitmap) as follows :
-
+To add images to SDK send POST request to the following endpoint.
 ::
+  curl 127.0.0.1:5000/add/<type>/<tag> -X POST -F "data=@./your_img.jpg"
 
-  float[] features = MobiusSDK.getCombinedFeatures(bitmap)
+where type is type of the sample (positive or negative) and tag is name of the custom tag.
 
-Features for training should be extract for positives and negatives and stored
-separately in an :java:`ArrayList<float[]>`, so the code would be like the following :
-
+You can do it from python as well.
 ::
+  def add_sample(img, sample_type, tag):
+    with open(img,'rb') as image:
+      data = {'data': image}
+      r = requests.post('http://127.0.0.1:5000/add/%s/%s'%(sample_type, tag), files=data).json()
+    return r
 
-  //This can be an computationally expensive task, so it should run in a separate thread
-  //Given a list of URIs for positives and negatives
-  Arraylist<Uri> UriListPositiveImages... //list of Uri for positives training images
-  Arraylist<Uri> UriListNegativeImages... //list of URI for negative training images
-  Bitmap bitmap...//Main bitmap to store the current image
-
-  //Example for the positives
-  int trainSizePos = UriListPositiveImages.size();
-  Arraylist<float[]> trainingFeaturesPos = new ArrayList<>(trainSizePos);
-  for (int k = 0; k < trainSizePos; k++){
-  loadImageFromFileFromUri(UriListPositiveImages.get(k));
-  trainingFeaturesPos.add(k, MobiusSDK.getCombinedFeatures(bitmap));}
-
-
-Same code for the negatives
-::
-
-  int trainSizeNeg = UriListNegativeImages.size();
-  Arraylist<float[]> trainingFeaturesNeg = new ArrayList<>(trainSizeNeg);
-  for (int k = 0; k < trainSizeNeg; k++){
-  loadImageFromFileFromUri(UriListNegativeImages.get(k));
-  trainingFeaturesNeg.add(k, MobiusSDK.getCombinedFeatures(bitmap));}
-
-
-Loading an image from a Uri can be done as follows
-
-::
-
-  private void loadImageFromFileFromUri(Uri uri) {
-      try{
-          ParcelFileDescriptor parcelFileDescriptor = getContentResolver().openFileDescriptor(uri, "r");
-          FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-          bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-          parcelFileDescriptor.close();}
-      catch (IOException e){e.printStackTrace();}}
-
-
-The features should be ideally cached to prevent re-processing the images. The SDK provides a basic serialization interface that can be used to cache a list of features:
-
-::
-
-  SerializableData serializableFeatures = new SerializableData(ArrayList<float[]> listOfFeatures);
-  //Use FileOutputStream/ObjectOutputStream to save for example
 
 Training
 ------------
 
-Once the features are extracted, training can be performed as follows:
-
+To run training send GET request to the following endpoint.
 ::
+  curl 127.0.0.1:5000/train/<tag>
 
-  //To publish training results override the publishProgress function
-  class AsyncTaskTrainingProgressCallback implements TrainingProgressCallback {
-      private RunTraining task;
-      AsyncTaskTrainingProgressCallback(RunTraining task) {this.task = task;}
-      @Override
-      public void publishProgress(int progress) {
-          try {task.publishProgress(progress);}
-          catch (Exception e) {e.printStackTrace();}
-      }
-  }
-
-  //If it's called inside an AsyncTask
-  protected Void doInBackground(Void... VoidInput) {
-    //MobiusSDK.resetCustomModel(customModelKey);
-    //If you want to reset the model, otherwise it does fine-tuning
-    MobiusSDK.trainCustomModel(customModelKey, trainingFeaturesPos, trainingFeaturesNeg, new AsyncTaskTrainingProgressCallback(this));
-    return null;}
-
-
-
-|model| saving and naming
----------------------------
-
-.. todo::
-
-  Naming is currently still missing here
-
-The |model| can be saved as follows :
-
+The request will return json with field task_id that can be used to get status of training:
 ::
-
-  Boolean success = MobiusSDK.saveCustomModel(customModelKey, getFilesDir().getPath() + "/" + CustomModelFileName);
-
+  curl 127.0.0.1:5000/status/<task_id> 
 
 
-Deployment
------------
+Prediction
+----------
 
-Once the |model| is trained, it can be used in the same manner as a pre-trained |model|
-by calling the :java:`predictCustomModel` function, which returns a result object.
+Prediction from image
+^^^^^^^^^^^^^^^^^^^^^
 
+You can use the following endpoint to get a prediction for custom models.
 ::
+  curl 127.0.0.1:5000/predict -X POST -F "data=@./your_img.jpg"
 
-  CustomModelResult result = MobiusSDK.predictCustomModel(customModelKey, float[] features);
-  float predictedScore = result.getScore(); //returns score between 0 and 1
-  bool classifciationResult = result.classify(); //returns boolean value if query belongs to custom class
+Or in python:
+::
+  def get_predictions(img):
+     with open(img,'rb') as image:
+         data = {'data': image}
+         pred = requests.post('http://127.0.0.1:5000/predict', files=data).json()
+     return pred
+
+The endpoint will return predictions for base models and for custom models.
+
+Prediction by features
+^^^^^^^^^^^^^^^^^^^^^^
+
+You can also do prediction using features which is much faster.
+
+To extract features use the following endpoint.
+::
+  curl 127.0.0.1:5000/get_features -X POST -F "data=@./your_img.jpg" --output features.json
+
+And you can do it in python as well.
+::
+  def get_features(img):
+     with open(img,'rb') as image:
+         data = {'data': image}
+         features = requests.post('http://127.0.0.1:5000/get_features', files=data).json()
+     return features
+
+You can save extracted features as you want.
+
+
+To get predictions from custom models by features use the following endpoint.
+::
+  curl 127.0.0.1:5000/predict_by_features -X POST -F "data=@./features.json"
+
+And python code.
+::
+  def get_predictions_by_features(features):
+     data = {'data': io.StringIO(unicode(json.dumps(features)))}
+     pred = requests.post('http://127.0.0.1:5000/predict_by_features', files=data).json()
+     return pred
+
+
+Backup and restore state
+------------------------
+
+To get state of the SDK use the following endpoint.
+::
+  curl 127.0.0.1:5000/get_state --output state.tar
+
+To restore internal state of SDK use the following endpoint.
+::
+  curl 127.0.0.1:5000/set_state -X POST -F "data=@./state.tar"

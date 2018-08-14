@@ -51,7 +51,7 @@ Installation from docker image
 
   1.1 Install Docker CE
   :: 
-    https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce
+    https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
   1.2. Add nvidia-docker repo to apt
   ::

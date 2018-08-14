@@ -1,7 +1,7 @@
 Installation
 ==================
 
-Before you can use the Mobius On-Premise SDK, you have to follow a few steps as explained here. There are two ways of installation: wheel package and docker image.
+Before you can use the Mobius On-Premise SDK, you have to follow a few steps as explained here. There are two ways of installation: wheel package and docker image. The docker image is very easy to install, but is around 5GB (for the GPU version). The wheel package requires a few more steps to be installed, but is only around 400 MB.
 
 
 Requirements for the Mobius On-Premise SDK
@@ -12,6 +12,7 @@ There are Requirements on the hardware and the software.
 There are the following requirements:
 
 *   CUDA 9+
+*   Python 2.7
 
 Installation from wheel package
 -------------------------
@@ -27,46 +28,50 @@ Installation from wheel package
   libgtk2.0-0
   pip install gunicorn Cython tensorflow-gpu==1.8 mxnet-cu90 onnx --user
 
-2. Install Mobius Vision package
+2. Copy the wheel file to your server, and change to that directory.
+
+3. Install Mobius Vision package
 ::
   pip install mobius_vision-0.1.2-cp27-cp27mu-linux_x86_64.whl --user
 
-3. Run redis server
+4. Run redis server
 ::
   sudo service redis-server start
+  
+Now you are ready to move to the next page.
 
 
 Installation from docker image
 -------------------------
 
-First, you need to install nvidia-docker2. If nvidia-docker2 are installed already then you can skip this step.
+1. First, you need to install nvidia-docker2. If nvidia-docker2 are installed already then you can skip this step and move to step 2.
 
-1. Install Docker CE
-:: 
-  https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce
+  1.1 Install Docker CE
+  :: 
+    https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce
 
-2. Add nvidia-docker repo to apt
-::
-  https://nvidia.github.io/nvidia-docker/
+  1.2. Add nvidia-docker repo to apt
+  ::
+    https://nvidia.github.io/nvidia-docker/
 
-3. Install the nvidia-docker2 package and reload the Docker daemon configuration
-::
-  sudo apt-get install nvidia-docker2
-  sudo pkill -SIGHUP dockerd
+  1.3. Install the nvidia-docker2 package and reload the Docker daemon configuration
+  ::
+    sudo apt-get install nvidia-docker2
+    sudo pkill -SIGHUP dockerd
 
-4. Add your user to the docker group.
-::
-  sudo usermod -aG docker $USER
+  1.4. Add your user to the docker group.
+  ::
+    sudo usermod -aG docker $USER
 
-5. Log out and log back in so that your group membership is re-evaluated.
+  1.5. Log out and log back in so that your group membership is re-evaluated.
 
 
-Load Mobius Vision docker image
+2. Load Mobius Vision docker image
 ::
   docker load --input mobius_vision.tar
 
 
-To check that image was loaded sucessfully run following command
+3. To check that image was loaded sucessfully run following command
 ::
   docker images
 

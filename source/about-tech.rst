@@ -31,8 +31,6 @@ Given one image as an input, the model returns the keywords for the objects it d
 
 .. image::
    data/keywords_tree.png
-   :height: 400 px
-   :width: 600 px
    :align: center
 
 Currently, the SDK does not enable to pinpoint to the objects. So the computer recognizes that

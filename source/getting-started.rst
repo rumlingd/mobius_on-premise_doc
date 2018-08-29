@@ -89,9 +89,5 @@ Or in python
 Prediction with large number of images
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-<<<<<<< HEAD
 Please note that prediction is time consuming. It's recommended to run predictions
-=======
-Please note that prediction is time consuming. It is recommended to run predictions
->>>>>>> 9c7a87f58d65779d261b7d02124f2426ba991cea
 in parallel.

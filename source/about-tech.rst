@@ -9,23 +9,16 @@ It gives computers some sense of hierarchical understanding on the content of im
 
 With this hierarchical understanding, computers can recognize complex objects in images.
 
-*hierarchical object recognition visualization*
-
-The SDK is shipped with two base models and a customizable mini-model that is built on top of the base models.
+The Mobius Vision SDK is shipped with two base models and a customizable mini-model that is built on top of the base models.
 The reasoning behind this set up is that customization needs far less effort as the base models already include
 lots of knowledge which can be leveraged directly for new objects or styles.
 
-Additionally, this SDK is specifically for mobile phones.
-
-.. todo::
-
-  improve text on mobile stuff
 
 Object recognition with keywords
 ------------------------------------
 
-The Mobius mobile SDK comes with a model for keywords that the computer can see in a given image.
-Our over 6000 keywords have different levels of granularity. It differs between people and no people but also on a lower level
+The Mobius Vision SDK comes with a model for keywords that the computer can see in a given image.
+Our over 5000 keywords have different levels of granularity. It differs between people and no people but also on a lower level
 between men and women.
 Given one image as an input, the model returns the keywords for the objects it detected with highest confidence.
 
@@ -39,13 +32,8 @@ there is an object in the given image but not where.
 Aesthetics evaluation
 -----------------------
 
-The second model that is included in the Mobius mobile SDK is a model to evaluate the aesthetics of an image.
+The second module that is included in Mobius Vision is a model to evaluate the aesthetics of an image.
 
-*some kind of aesthetics illustration here*
-
-.. todo::
-
-  improve text on aesthetics model
 
 Customizable mini-model
 ------------------------
@@ -53,18 +41,20 @@ Customizable mini-model
 One powerful tool that comes with the SDK is a customizable and reusable mini-model.
 It is built on top of our object recognition and aesthetics base models - so it can use their knowledge to understand properties of new objects or styles.
 
-Mobile models
----------------
+Optional mobile models porting
+--------------------------------
 
-The models in this SDK are specifically adapted to run on edge (on the device).
-This has great advantages such as:
+The base models in this on-premise SDK are large models to be run on GPUs.
+However, at Mobius Labs we also have great mobile models that are much smaller and faster.
+The accuracy of these models is slightly lower. If a large speedup is necessary, please contact us about this option.
 
-* Data privacy and security by design: the data always stays on the phone
-* Offline processing possible: no need for access to the internet
-* Analysis of images on the camera roll of the user: possible to recommend which image to upload to an app
+Advantages of on-premise installation compared to API service
+---------------------------------------------------------------
+This set-up has great advantages such as:
+
+* Data privacy by design: the data always stays in your system
+* Security as control over the data flow is kept
+* Fast speed that is not depending on latency
 
 at a moderate cost of:
-
-* Uses computational resources of the phone (specifically for training that might take a few seconds)
-* Increased battery usage
-* Increased requirements for installation
+* Slightly more difficult installation 

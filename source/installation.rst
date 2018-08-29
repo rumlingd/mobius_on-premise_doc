@@ -5,7 +5,7 @@ Before you can use the Mobius On-Premise SDK, you have to follow a few steps as 
 
 
 Requirements for the Mobius On-Premise SDK
------------------------------------------
+-------------------------------------------
 
 There are Requirements on the hardware and the software.
 
@@ -15,10 +15,11 @@ There are the following requirements:
 *   Python 2.7
 
 Installation from wheel package
--------------------------
+---------------------------------
 
 1. Install prerequisites
 ::
+
   sudo apt-get update
   sudo apt-get install -y \
   redis-server \
@@ -32,35 +33,41 @@ Installation from wheel package
 
 3. Install Mobius Vision package
 ::
+
   pip install mobius_vision-0.1.2-cp27-cp27mu-linux_x86_64.whl --user
 
 4. Run redis server
 ::
+
   sudo service redis-server start
-  
+
 Now you are ready to move to the next page.
 
 
 Installation from docker image
--------------------------
+-------------------------------
 
 1. First, you need to install nvidia-docker2. If nvidia-docker2 are installed already then you can skip this step and move to step 2.
 
   1.1 Install Docker CE
-  :: 
+  ::
+
     https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce
 
   1.2. Add nvidia-docker repo to apt
   ::
+
     https://nvidia.github.io/nvidia-docker/
 
   1.3. Install the nvidia-docker2 package and reload the Docker daemon configuration
   ::
+
     sudo apt-get install nvidia-docker2
     sudo pkill -SIGHUP dockerd
 
   1.4. Add your user to the docker group.
   ::
+
     sudo usermod -aG docker $USER
 
   1.5. Log out and log back in so that your group membership is re-evaluated.
@@ -68,14 +75,17 @@ Installation from docker image
 
 2. Load Mobius Vision docker image
 ::
+
   docker load --input mobius_vision.tar
 
 
 3. To check that image was loaded sucessfully run following command
 ::
+
   docker images
 
 You should see something like this
 ::
+
   REPOSITORY TAG IMAGE ID CREATED SIZE
   mobius_labs/mobius_sdk 0.1 ef8d42276b3f 18 minutes ago 6GB

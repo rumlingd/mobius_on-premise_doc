@@ -1,8 +1,8 @@
-Support and FAQ
-=================
-
 Support
---------
+========
+
+General support
+----------------
 
 You can reach our support via a few different channels.
 
@@ -14,25 +14,8 @@ feel free to contact our friendly colleagues at the sales team.
 Send an email to:
 sales@mobius.ml
 
-Ask a question on Stack overflow: *I have no clue how to get a tag there...*
-*(I just stole this from google API support haha)*
+Data protection
+----------------
 
-https://stackoverflow.com/questions/tagged/mobius-sdk
-
-You can find our data privacy information here:
-
-*insert link*
-
-Or contact our data privacy officer:
+If you have any concerns regarding data privacy please contact our data privacy officer:
 datenschutz@mobius.ml
-
-FAQ
--------
-
-We need some structure for questions depending on index structure.
-
-Question section 1: Basic stuff: license, tokens, sign-up
-
-Question section 2: Errors, models, customization, demo app
-
-Question section 3: Addtional features: Multi-language support, custom models

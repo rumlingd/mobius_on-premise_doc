@@ -54,7 +54,7 @@ Prediction
 Prediction from image
 ^^^^^^^^^^^^^^^^^^^^^
 
-You can use the following endpoint to get a prediction for custom models.
+You can use general endpoint to get a prediction for custom models.
 ::
 
   curl 127.0.0.1:5000/predict -X POST -F "data=@./your_img.jpg"
@@ -68,7 +68,32 @@ Or in python:
          pred = requests.post('http://127.0.0.1:5000/predict', files=data).json()
      return pred
 
-The endpoint will return predictions for base models and for custom models.
+This endpoint will return predictions for base models and for custom models.
+
+Or you can get only prediction for custom models.
+::
+  curl 127.0.0.1:5000/predict/custom -X POST -F "data=@./your_img.jpg"
+
+Or in python:
+::
+  def get_custom_predictions(img):
+     with open(img,'rb') as image:
+         data = {'data': image}
+         pred = requests.post('http://127.0.0.1:5000/predict/custom', files=data).json()
+     return pred
+
+Or even get prediction only for one model:
+::
+  curl 127.0.0.1:5000/predict/custom/<tag> -X POST -F "data=@./your_img.jpg"
+
+Or in python:
+::
+  def get_custom_predictions(img, tag):
+     with open(img,'rb') as image:
+         data = {'data': image}
+         pred = requests.post('http://127.0.0.1:5000/predict/custom/%s'%tag, files=data).json()
+     return pred
+
 
 Prediction by features
 ^^^^^^^^^^^^^^^^^^^^^^

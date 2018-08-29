@@ -31,5 +31,6 @@ We currently offer three modules included in the Mobius Vision SDK and our On Pr
    about-tech
    installation
    getting-started
+   similarity-search
    advanced-training
    faq

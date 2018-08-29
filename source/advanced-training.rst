@@ -72,10 +72,12 @@ This endpoint will return predictions for base models and for custom models.
 
 Or you can get only prediction for custom models.
 ::
+
   curl 127.0.0.1:5000/predict/custom -X POST -F "data=@./your_img.jpg"
 
 Or in python:
 ::
+
   def get_custom_predictions(img):
      with open(img,'rb') as image:
          data = {'data': image}
@@ -84,10 +86,12 @@ Or in python:
 
 Or even get prediction only for one model:
 ::
+
   curl 127.0.0.1:5000/predict/custom/<tag> -X POST -F "data=@./your_img.jpg"
 
 Or in python:
 ::
+
   def get_custom_predictions(img, tag):
      with open(img,'rb') as image:
          data = {'data': image}

@@ -18,12 +18,9 @@ Wheel version
 
 2. Run model server (in separate window, e.g., screen -S model_server)
 ::
-<<<<<<< HEAD
 
   NUM_WORKERS="10" MOBIUS_TOKEN="<your_token>" run_all_models
-=======
-  MOBIUS_TOKEN="<your_token>" run_all_models
->>>>>>> 9c7a87f58d65779d261b7d02124f2426ba991cea
+
 
 3. Test installation
 ::

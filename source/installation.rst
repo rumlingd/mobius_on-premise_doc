@@ -18,6 +18,7 @@ Installation from wheel package
 --------------------------------
 0. Confirm that the python version you are running is 2.7
 ::
+
   python --version
 
 1. Install prerequisites

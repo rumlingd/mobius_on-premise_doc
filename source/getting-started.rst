@@ -34,7 +34,7 @@ Docker version
 1. Run docker image
 ::
 
-  nvidia-docker run -p 5000:5000 -e CUDA_VISIBLE_DEVICES="0" -e NUM_WORKERS="10" -e MOBIUS_TOKEN="<your_token>" -it mobius_labs/mobius_sdk:0.1
+  nvidia-docker run -v sim_search_data:/data -v sim_search_redis:/var/lib/redis -p 5000:5000 -e CUDA_VISIBLE_DEVICES="0" -e NUM_WORKERS="10" -e MOBIUS_TOKEN="<your_token>" -it mobius_labs/mobius_sdk:0.1
 
 2. Test installation
 ::

@@ -15,7 +15,11 @@ There are the following requirements:
 *   Python 2.7
 
 Installation from wheel package
----------------------------------
+--------------------------------
+0. Confirm that the python version you are running is 2.7
+::
+
+  python --version
 
 1. Install prerequisites
 ::
@@ -50,9 +54,8 @@ Installation from docker image
 1. First, you need to install nvidia-docker2. If nvidia-docker2 are installed already then you can skip this step and move to step 2.
 
   1.1 Install Docker CE
-  ::
+  https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce
 
-    https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce
 
   1.2. Add nvidia-docker repo to apt
   ::

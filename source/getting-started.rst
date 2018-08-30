@@ -4,22 +4,23 @@ Getting Started and Prediction
 Running the SDK
 ----------------
 
-Running the SDK depends on installation type.
+Running the SDK depends on the installation type (wheel or docker)
 
 
 Wheel version
 ^^^^^^^^^^^^^^
 
 
-1. Run server (in separate window)
+1. Run server (in separate window, e.g., screen -S vision_server)
 ::
 
   CUDA_VISIBLE_DEVICES="" MOBIUS_TOKEN="<your_token>" gunicorn -w 10 -b 0.0.0.0:5000 mobius_vision.request_server.main:application
 
-2. Run model server (in separate window)
+2. Run model server (in separate window, e.g., screen -S model_server)
 ::
 
   NUM_WORKERS="10" MOBIUS_TOKEN="<your_token>" run_all_models
+
 
 3. Test installation
 ::

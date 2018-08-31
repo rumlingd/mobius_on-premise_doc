@@ -99,9 +99,9 @@ Or this call from a python script:
 ::
 
   def search(img_path):
-      with open(img,'rb') as image:
+      with open(img_path, 'rb') as image:
           data = {'data': image}
-          r = requests.post('http://10.101.101.21:5000/similarity/search', files=data).json()
+          r = requests.post('http://127.0.0.1:5000/similarity/search', files=data).json()
       return r
 
 .. note::
@@ -145,7 +145,7 @@ To update the index send a GET request to the following endpoint.
 
   curl 127.0.0.1:5000/similarity/update
 
-The request will also return a json file with a task_id that can be used to get status of training:
+The request will also return a json file with a task_id that can be used to get status of updating:
 ::
 
   curl 127.0.0.1:5000/similarity/status/<task_id>

@@ -29,7 +29,7 @@ The following illustration shows in a simplified manner how the SDK works.
 Adding samples
 --------------
 
-The first step is to add images to the SDK by sending a POST request to the following endpoint.
+The first step is to add images to the docker volume by sending a POST request to the following endpoint.
 ::
 
   curl 127.0.0.1:5000/similarity/add?id=<unique_id> -X POST -F "data=@./your_img.jpg"
@@ -40,7 +40,7 @@ where id is an optional argument. Without this argument system will generate a r
 
   The ID numbers for sample images should be unique since it's used internally to identify the images. We recommend either using numbers or a combination of numbers and letters. It should be passed as a sting.
 
-You can add samples from python as well.
+You can add samples from a python script as well.
 ::
 
   def add_sample(img_path, ID):
@@ -49,15 +49,23 @@ You can add samples from python as well.
         r = requests.post('http://127.0.0.1:5000/similarity/add?id=%s' % ID, files=data).json()
     return r
 
+The SDK is then processing these images to extract numerical features according to our pre-trained Mobius keywording model. For each image we generate something we call an "index".
+
 Training
 ------------
 
-To run index training send GET request to the following endpoint. You should add at least 1 000 images to train index successfully. Recommended number of images before train is 100 000.
+For the search the extracted numerical representation of the images has to be further processed. The index training enables fast search and adaptation to the given image data.
+
+To run index training send GET request to the following endpoint.
 ::
 
   curl 127.0.0.1:5000/similarity/train
 
-The request will return json with field task_id that can be used to get status of training:
+.. note::
+
+  You should add at least 1 000 images for successful index training. We recommended to use at least 100 000 images.
+
+The request will return a json file with the field task_id that can be used to get status of training:
 ::
 
   curl 127.0.0.1:5000/similarity/status/<task_id>

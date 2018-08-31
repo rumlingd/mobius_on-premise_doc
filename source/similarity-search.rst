@@ -1,25 +1,53 @@
 Advanced: Similarity Search
 =================================
 
+Overview and work flow
+------------------------
+It takes a few steps to run the whole similarity search with the Mobius Vision SDK.
+Generally there is a difference between the very first usage and then usage in a running system.
+In both cases samples have to be added. In the initial phase the system is trained with all images.
+In the update step, only those images are added to the index list. This prevents the computationally heavy training procedure to be carried out again on all input images.
+
+Initial phase:
+
+#. Add samples
+#. Train index
+#. Search with query image
+
+In a running system:
+
+#. Add sample
+#. Update index
+#. Search with query image
+
+The following illustration shows in a simplified manner how the SDK works.
+
+.. image::
+  data/similarity_search.png
+  :align: left
 
 Adding samples
 --------------
 
-To add images to SDK send POST request to the following endpoint.
+The first step is to add images to the SDK by sending a POST request to the following endpoint.
 ::
 
   curl 127.0.0.1:5000/similarity/add?id=<unique_id> -X POST -F "data=@./your_img.jpg"
 
-where id is optional argument. ID should be unique. Without the argument system will generate random ID and return it as a response.
+where id is an optional argument. Without this argument system will generate a random ID number and return it as a response.
 
-You can do it from python as well.
+.. note::
+
+  The ID numbers for sample images should be unique since it's used internally to identify the images. We recommend either using numbers or a combination of numbers and letters. It should be passed as a sting.
+
+You can add samples from python as well.
 ::
 
-  def add_sample(img_path, i):
-      with open(img,'rb') as image:
-          data = {'data': image}
-          r = requests.post('http://127.0.0.1:5000/similarity/add?id=%d'%i, files=data).json()
-      return r
+  def add_sample(img_path, ID):
+    with open(img_path, 'rb') as image:
+        data = {'data': image}
+        r = requests.post('http://127.0.0.1:5000/similarity/add?id=%s' % ID, files=data).json()
+    return r
 
 Training
 ------------

@@ -14,9 +14,10 @@ The following illustration shows a simplified view of how the similarity search 
 Getting Started
 --------------
 
-## Adding Images to the Image Database
+Adding Images to the Image Database
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The first step is to add images to the docker volume by sending a POST request to the following endpoint:
+The first step is to add images to the system by sending a POST request to the following endpoint:
 ::
 
   curl 127.0.0.1:5000/similarity/add?id=<unique_id> -X POST -F "data=@./your_img.jpg"
@@ -35,21 +36,23 @@ You can also add samples using the following python script:
         data = {'data': image}
         r = requests.post('http://127.0.0.1:5000/similarity/add?id=%s' % ID, files=data).json()
     return r
-    
+
 Lastly, here is an example how to use multiprocessing in python to speed things up:
 ::
 
   from multiprocessing import Pool
   import requests
 
-  def add_sample(img_path, ID):
+  def add_sample(item):
+    img_path = item['path']
+    ID = item['ID']
     with open(img_path, 'rb') as image:
         data = {'data': image}
         r = requests.post('http://127.0.0.1:5000/similarity/add?id=%s' % ID, files=data).json()
     return r
 
   pool = Pool(50)
-  images = [path_to_image1, path_to_iamge2, ...] #List of image paths
+  images = [{'ID': '1', 'path': path_to_image1}, {'ID': '2', 'path': path_to_image2}, ...] #List of image paths
   results = pool.map(add_sample, images)
   pool.close()
   pool.join()
@@ -61,7 +64,9 @@ When images are added to the database, the SDK processes them by extracting nume
   This step is computationally expensive. If the number of images is large (e.g., more than 1 million), it may take more than one day to process all images on a single GPU.
 
 
-## Training Similarity Search Approximator
+Training Similarity Search Approximator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 Once all images have been added to the image dataset, the numerical features extracted in the last step have to be further processed in order to scale to large datasets. Furthermore, the so-called "similarity search approximator" enables fast search and adaptation to the provided image data.
 
@@ -92,7 +97,7 @@ The following error messages could appear:
 Searching for Similar Images
 ----------------------------
 
-Please ensure that you have successfully completed the "getting started" before reading on. That is, you should have added images to the docker volume, and trained the similarity search approximator for all images in the database. If this is the case, you are ready to run the similarity search.
+Please ensure that you have successfully completed the "getting started" before reading on. That is, you should have added images to the system, and trained the similarity search approximator for all images in the database. If this is the case, you are ready to run the similarity search.
 
 Similarity search with a query image can be used with the following endpoint:
 ::
@@ -137,20 +142,22 @@ You can control the number of similar images returned by the environment variabl
   You can use the environment variable NPROB to balance between speed and accuracy. Its value has to be an integer between 1 and 100 (smaller value means faster search, with less accurate results). The recommended (default) value is 5.
 
 Extending an existing Image Database
-------------
+------------------------------------
 
-It might be desired to add more images to the image database in a running system. This section details the required steps to this this in an efficient manner. In particular, we provide an update function  this case, one can use the update function that preserves previously added images in the index, and adds the new images without retraining the images that are already in the image database.
+It might be desired to add more images to the image database in a running system. This section details the required steps to do this in an efficient manner. In particular, we provide an update function for this case, one can use the update function that preserves previously added images in the similarity search approximator, and adds the new images without retraining of similarity search approximator.
 
-## Adding Images to the Image Database
+Adding Images to the Image Database
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The first step consists of adding the new images to the image database. This step is identical to the one explained above. That is, the images are added to the docker volume by sending a POST request to the following endpoint:
+The first step consists of adding the new images to the image database. This step is identical to the one explained above. That is, the images are added to the system by sending a POST request to the following endpoint:
 ::
 
   curl 127.0.0.1:5000/similarity/add?id=<unique_id> -X POST -F "data=@./your_img.jpg"
 
 where id is an optional argument. Without this argument, the system will generate a random ID number and return it as a response.
 
-## Updating the Similarity Search Approximator
+Updating the Similarity Search Approximator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Once all the desired images have been added, one has to update the similarity search approximator. This can be done by sending a GET request to the following endpoint.
 ::

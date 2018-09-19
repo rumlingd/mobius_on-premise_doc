@@ -69,6 +69,11 @@ For some simple images, the keywording module might only recognise a small numbe
 However, in cluttered scenes, there might be a long list of matching keywords. Depending of the image, the number
 of returned keywords might vary.
 
+There is an additonal request argument `top_k` to obtain the top k keywords.
+::
+
+  curl 127.0.0.1:5000/predict/concepts?top_k=10 -X POST -F "data=@./your_image.jpg"
+
 
 **Aesthetics**
 

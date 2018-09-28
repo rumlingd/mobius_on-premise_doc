@@ -96,3 +96,15 @@ Prediction with large number of images
 
 Please note that prediction is time consuming. It's recommended to run predictions
 in parallel.
+
+Here is an example how to use multiprocessing in python to speed things up:
+::
+
+  from multiprocessing import Pool
+  import requests
+
+  pool = Pool(50)
+  images = [path_to_image1, path_to_image2, ...] #List of image paths
+  results = pool.map(get_keywords, images)
+  pool.close()
+  pool.join()

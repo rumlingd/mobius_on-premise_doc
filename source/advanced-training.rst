@@ -11,7 +11,7 @@ Steps for training:
 * test trained customisation module using the predict function
 
 .. image::
-   data/PA2.png
+   data/PA3.png
    :align: center
 
 Adding positive and negative samples

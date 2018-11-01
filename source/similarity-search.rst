@@ -20,7 +20,7 @@ Adding Images to the Image Database
 The first step is to add images to the system by sending a POST request to the following endpoint:
 ::
 
-  curl 127.0.0.1:5000/similarity/add?id=<unique_id> -X POST -F "data=@./your_img.jpg"
+  curl 127.0.0.1:5000/similarity/add?image_id=<unique_id> -X POST -F "data=@./your_img.jpg"
 
 where id is an optional argument. Without this argument, the system will generate a random ID number and return it as a response.
 
@@ -31,10 +31,10 @@ where id is an optional argument. Without this argument, the system will generat
 You can also add samples using the following python script:
 ::
 
-  def add_sample(img_path, ID):
+  def add_sample(img_path, image_id):
     with open(img_path, 'rb') as image:
         data = {'data': image}
-        r = requests.post('http://127.0.0.1:5000/similarity/add?id=%s' % ID, files=data).json()
+        r = requests.post('http://127.0.0.1:5000/similarity/add?image_id=%s' % image_id, files=data).json()
     return r
 
 Lastly, here is an example how to use multiprocessing in python to speed things up:
@@ -45,14 +45,14 @@ Lastly, here is an example how to use multiprocessing in python to speed things 
 
   def add_sample(item):
     img_path = item['path']
-    ID = item['ID']
+    image_id = item['image_id']
     with open(img_path, 'rb') as image:
         data = {'data': image}
-        r = requests.post('http://127.0.0.1:5000/similarity/add?id=%s' % ID, files=data).json()
+        r = requests.post('http://127.0.0.1:5000/similarity/add?image_id=%s' % image_id, files=data).json()
     return r
 
   pool = Pool(50)
-  images = [{'ID': '1', 'path': path_to_image1}, {'ID': '2', 'path': path_to_image2}, ...] #List of image paths
+  images = [{'image_id': '1', 'path': path_to_image1}, {'image_id': '2', 'path': path_to_image2}, ...] #List of image paths
   results = pool.map(add_sample, images)
   pool.close()
   pool.join()
@@ -86,9 +86,8 @@ The request above will return a json file with the field task_id. The following 
 
 The following error messages could appear:
 
-* *'need more samples'*: the number of samples is less than 1 000
-* *'no samples'*: no samples have been added for training
-* *'no index, train first'*: update function can only be called after one training has been carried out
+* *'more_samples_required'*: the number of samples is less than 1 000
+* *'index_loading_error'*: update function can only be called after one training has been carried out
 
 .. note::
 
@@ -121,7 +120,7 @@ The output is split into three parts:
 
 * A list of distances in floating point precision that quantifies the similarity to the most similar images found. Since lower distance implies higher similarity, this list is sorted in ascending order.
 * A list of image IDs (as specified when images were added to the image database) of the most similar images, sorted the same way as the first list.
-* A status message, which says 'ok' if no error occurred in the search, and 'error' otherwise.
+* A status message, which says 'success' if no error occurred in the search, and 'error' otherwise.
 
 
 Example of an output
@@ -130,7 +129,7 @@ Example of an output
   {
       'dist': [349.9123229980469, 363.0243835449219, 501.1552734375, 519.2177734375, 576.5772705078125, 663.9130859375, 667.498291015625, 671.4913940429688, 684.84228515625, 705.6535034179688],
       'result': ['1260', '140', '1267', '1685', '866', '1173', '583', '105', '4', '154'],
-      'status': u'ok'
+      'status': u'success'
   }
 
 In the example, the image with ID 1260 is the most similar to the query image provided, with a distance of 349.912.
@@ -152,7 +151,7 @@ Adding Images to the Image Database
 The first step consists of adding the new images to the image database. This step is identical to the one explained above. That is, the images are added to the system by sending a POST request to the following endpoint:
 ::
 
-  curl 127.0.0.1:5000/similarity/add?id=<unique_id> -X POST -F "data=@./your_img.jpg"
+  curl 127.0.0.1:5000/similarity/add?image_id=<unique_id> -X POST -F "data=@./your_img.jpg"
 
 where id is an optional argument. Without this argument, the system will generate a random ID number and return it as a response.
 

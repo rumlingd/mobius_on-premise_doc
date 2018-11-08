@@ -24,13 +24,22 @@ We currently offer three modules included in the Mobius Vision SDK and our On Pr
 
 
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Content:
 
-   about-tech
-   installation
-   getting-started
-   similarity-search
-   advanced-training
-   faq
+.. toctree::
+  :maxdepth: 2
+  :caption: General
+
+  about-tech
+  installation
+
+.. toctree::
+  :caption: Image Features
+
+  getting-started
+  similarity-search
+  advanced-training
+
+.. toctree::
+  :caption: Video Features
+
+  faq

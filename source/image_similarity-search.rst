@@ -1,4 +1,4 @@
-Advanced: Similarity Search
+Similarity Search
 =================================
 
 Overview and Work Flow
@@ -12,7 +12,7 @@ The following illustration shows a simplified view of how the similarity search 
   :align: left
 
 Getting Started
---------------
+----------------
 
 Adding Images to the Image Database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

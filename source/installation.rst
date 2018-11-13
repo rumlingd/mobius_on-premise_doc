@@ -1,3 +1,5 @@
+.. _installation-label:
+
 Installation
 ==================
 
@@ -7,12 +9,11 @@ Before you can use the Mobius On-Premise SDK, you have to follow a few steps as 
 Requirements for the Mobius On-Premise SDK
 -------------------------------------------
 
-There are Requirements on the hardware and the software.
+In order to run the Mobius Vision On-Premise SDK, the following software requirements have to be met:
 
-There are the following requirements:
-
-*   CUDA 9+
+*   CUDA 9+ (requires a GPU)
 *   Python 2.7
+*   ffmpeg 2.8.15 (only for |mobvis_video|)
 
 
 Installation from docker image
@@ -20,13 +21,11 @@ Installation from docker image
 
 1. First, you need to install nvidia-docker2. If nvidia-docker2 are installed already then you can skip this step and move to step 2.
 
-  1.1 Install Docker CE
+  1.1 Install Docker CE: 
   https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 
-  1.2. Add nvidia-docker repo to apt
-  ::
-
+  1.2. Add nvidia-docker repo to apt, as explained here: 
     https://nvidia.github.io/nvidia-docker/
 
   1.3. Install the nvidia-docker2 package and reload the Docker daemon configuration

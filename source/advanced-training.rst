@@ -47,6 +47,14 @@ The request will return json with field task_id that can be used to get status o
 
   curl 127.0.0.1:5000/status/<task_id>
 
+To specify the number of clusters add argument num_clusters to the endpoint (1 by default).
+
+To apply aesthetic model set an argument apply_aesthetic_score=true (disable by default).
+  
+To apply stock score model set an argument apply_stock_score=true to the endpoint (disable by default).
+::
+
+  curl 127.0.0.1:5000/train/<tag>?num_clusters=3&apply_aesthetic_score=true&apply_stock_score=true
 
 Prediction
 ----------
@@ -134,6 +142,13 @@ And python code.
      pred = requests.post('http://127.0.0.1:5000/predict_by_features', files=data).json()
      return pred
 
+Remove models
+-------------
+
+To remove custom model send GET request to the following endpoint.
+::
+
+  curl 127.0.0.1:5000/clean/<tag>
 
 Backup and restore state
 -------------------------

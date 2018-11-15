@@ -1,8 +1,12 @@
 Video Tagging
-=======================================
+==============
 The video tagging module has been trained on our large in-house image dataset to provide state-of-the-art keywording results. Depending on the licence, it consists of a video shot detector, a keywording module for static concepts and emotions, as well as an action recognition module.
 
-In the following, we show an example of how to do prediction of keywords and/or actions on videos. 
+Getting started
+---------------
+
+In the following, we show an example of how to do prediction of keywords and/or actions on videos. In the example, both the keywording and the action recognition feature are enabled. If you only have either one of the tagging features, you can still run this code, but your output will be different.
+
 First, we need to send the video to the (local) vision server for analysis.
 ::
 
@@ -43,25 +47,45 @@ All keywords with a confidence above a certain threshold are returned (0.5 by de
     Depending on the complexity of a video shot, the number of keywords returned will vary. In addition, in case the shot
     detector in disabled, the results might also be of lower quality in cases where a segment contains different shots (and hence, potentially very different concepts). 
     
+    
 
-Optional arguments
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Arguments
+----------
 
-There are a number of arguments that can be passed:
-
-* keyword_threshold (default 0.5): Threshold on the confidence of the keyword predictions
-* keyword_topk (default 50): Maximum number of keywords to be returned *per video shot*
-* action_threshold (default 0.6): Threshold on the confidence of action predictions
-* action_topk (default 1): Maximum number of actions to be returned *per video shot*
-
-The arguments can be passed by adding a "?" after the tag command, followed by the argument=value. Several arguments are separated using the "&". The following example illustrates this:
+Depending on the features that have been bought, there are a number of arguments that can be passed. The arguments can be passed by adding a "?" after the tag command, followed by the argument=value. Several arguments are separated using the "&". The following example illustrates this:
 ::
   
   curl 127.0.0.1:5000/video/tag?keyword_threshold=0.6&action_threshold=0.7 -X POST -F "data=@./your_video.mp4"
+  
+Below is list of the different arguments that can be set, together with their default values.
+
+**Keyword Tagging**
+If you have bought the keyword tagging feature, the following arguments can be set:
+
+* *tag_keywords* (default *true*): Flag to signal if keywording tags should be returned
+* *keyword_threshold* (default *0.5*): Threshold on the confidence of the keyword predictions
+* *keyword_topk* (default *50*): Maximum number of keywords to be returned *per video shot*
+
+**Action Tagging**
+If you have bought the action tagging feature, the following arguments can be set:
+
+* *tag_actions* (default *true*): Flag to signal if action tags should be returned
+* *action_threshold* (default *0.6*): Threshold on the confidence of action predictions
+* *action_topk* (default *1*): Maximum number of actions to be returned *per video shot*
+
+**Segment-level and Video-level Tagging**
+|mobvis_video| offers both segment-level as well as video-level tagging of videos, whose default values depend on whether the **shot detection feature** has been bought. The arguments are:
+
+* *video_level_tags* (default *true*)
+* *shot_level_tags* (default *true* if **shot detection has been bought**, *false* otherwise)
+
+Furthermore, an optional argument can be used to specify a fixed video tagging interval. This can be useful in case teh shot detector has not been bought, but the content is still changing over time.
+
+* *fixed_segment_length_in_secs* (default *3*)
 
 
 Error messages
-^^^^^^^^^^^^^^
+---------------
 
 If there is an error on one of the input arguments, the following status message will be returned:
 ::
@@ -75,7 +99,7 @@ If the video format is not supported, the status message is:
   
 
 Prediction in Python
-^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 The code snipped below shows how prediction can be done in Python.
 

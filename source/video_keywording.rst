@@ -60,6 +60,7 @@ Depending on the features that have been bought, there are a number of arguments
 Below is list of the different arguments that can be set, together with their default values.
 
 **Keyword Tagging**
+
 If you have bought the keyword tagging feature, the following arguments can be set:
 
 * *tag_keywords* (default *true*): Flag to signal if keywording tags should be returned
@@ -67,6 +68,7 @@ If you have bought the keyword tagging feature, the following arguments can be s
 * *keyword_topk* (default *50*): Maximum number of keywords to be returned *per video shot*
 
 **Action Tagging**
+
 If you have bought the action tagging feature, the following arguments can be set:
 
 * *tag_actions* (default *true*): Flag to signal if action tags should be returned
@@ -74,14 +76,19 @@ If you have bought the action tagging feature, the following arguments can be se
 * *action_topk* (default *1*): Maximum number of actions to be returned *per video shot*
 
 **Segment-level and Video-level Tagging**
+
 |mobvis_video| offers both segment-level as well as video-level tagging of videos, whose default values depend on whether the **shot detection feature** has been bought. The arguments are:
 
 * *video_level_tags* (default *true*)
 * *shot_level_tags* (default *true* if **shot detection has been bought**, *false* otherwise)
 
-Furthermore, an optional argument can be used to specify a fixed video tagging interval. This can be useful in case teh shot detector has not been bought, but the content is still changing over time.
+Furthermore, an optional argument can be used to specify a fixed video tagging interval. This can be useful in case the shot detection feature has not been bought, but the content is still changing over time.
 
 * *fixed_segment_length_in_secs* (default *3*)
+
+.. note::
+  
+  If *fixed_segment_length_in_secs* is set, the shot detector is disabled.
 
 
 Error messages

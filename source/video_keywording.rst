@@ -84,11 +84,11 @@ If you have bought the action tagging feature, the following arguments can be se
 
 Furthermore, an optional argument can be used to specify a fixed video tagging interval. This can be useful in case the shot detection feature has not been bought, but the content is still changing over time.
 
-* *fixed_segment_length_in_secs* (default *3*)
+* *fixed_segment_length* (default *3*)
 
 .. note::
   
-  If *fixed_segment_length_in_secs* is set, the shot detector is disabled.
+  If *fixed_segment_length* is set, the shot detector is disabled.
 
 
 Error messages

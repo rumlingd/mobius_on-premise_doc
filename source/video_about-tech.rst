@@ -11,6 +11,14 @@ Video Shot Detection
 
 An important concept in videos is the one of 'shots'. While there are several definitions of what a shot is, for our intents and purposes, we define a shot as a sequence of frames where the semantics (that is, the content) only changes slowly. In order to perform a meaningful analysis of a video, it is highly beneficial to identify so-called 'video shot boundaries', or 'shot boundaries' for short. 
 
+The figure below further illustrates the concept of 'shot boundaries', on the example of a short video that has been created from three separate 'clips'. Note that each clip is a video that has been recorded at one go, without turning the camera off. As one can see, while there are only *three clips* in the video, there are actually *five shots* detected. This is because the concent of the scene (and hence the concepts) change over time, even within a clip. In the first clip of the illustration, for example, the camera pans from a close-up of the flowers to the landscape shot of the mountain range with the river, which causes a 'shot' change.
+
+
+.. image::
+   data/shots_viz.png
+   :align: center
+   
+   
 The |mobvis_video| features a highly efficient shot boundary detector. With the shots identified, the SDK offers a shot-level keywording module, as well as an action detection module. 
 
 .. note::
@@ -26,12 +34,9 @@ Video Keywording (Static Concepts and Emotions)
 
 |mobvis_video| offers both a |lightweight_model| and a |performance_model| keywording model, which can identify over 5000 concepts and emotions. The |lightweight_model| model is computationally very efficient, but slightly less accurate than the performance one. As such, it is recommended in cases where speed matters, such as real-time applications. The |performance_model| model runs around 10 times slower, but offers the highest quality keywording results.
 
-Since content can change quite drastically within a video, we offer both 'segment-level' as well as 'video-level' keywording. As the names suggest, segment-level keywording finds keywords for each individual segment, whereas video-level keywording provides keywords that are representative of the whole video. 
+Since content can change quite drastically within a video, we offer both 'segment-level' as well as 'video-level' keywording. As the names suggest, segment-level keywording finds keywords for each individual segment, whereas video-level keywording provides keywords that are representative of the whole video. The figure above illustrates these concepts.
 
-..
-    .. image::
-       data/keywords_tree.png
-       :align: center
+
 
 
 

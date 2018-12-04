@@ -12,11 +12,11 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption: General
+  :caption: Overview
   
   landing_page
   installation
-  faq
+
 
 .. toctree::
   :caption: Image Features
@@ -35,5 +35,10 @@
   video_about-tech
   video_run_sdk
   video_keywording
+  
+.. toctree::
+  :caption: Misc
+  
+  faq
 
 

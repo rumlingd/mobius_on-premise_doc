@@ -40,8 +40,8 @@ Since content can change quite drastically within a video, we offer both 'segmen
 
 
 
-Action recognition
-^^^^^^^^^^^^^^^^^^
+Action recognition (Experimental)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A key difference between images and videos is that in a video, we can look at the temporal evolution of events, which allows us to identify actions, such as walking, running, jumping, etc. |mobvis_video| currently recongnizes 140 actions. 
 

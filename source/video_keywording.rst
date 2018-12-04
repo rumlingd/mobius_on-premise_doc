@@ -67,7 +67,7 @@ If you have bought the keyword tagging feature, the following arguments can be s
 * *keyword_threshold* (default *0.5*): Threshold on the confidence of the keyword predictions
 * *keyword_topk* (default *50*): Maximum number of keywords to be returned *per video shot*
 
-**Action Tagging**
+**Action Tagging (Experimental)**
 
 If you have bought the action tagging feature, the following arguments can be set:
 

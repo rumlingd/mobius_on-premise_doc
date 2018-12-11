@@ -9,7 +9,7 @@ Prediction with the aesthetics module works in a similar way to the keywording m
 Or in python
 ::
 
-  def get_aesthetic(host, img):
+  def get_aesthetic(img):
      with open(img,'rb') as image:
          data = {'data': image}
          pred = requests.post('http://127.0.0.1:5000/predict/aesthetic', files=data).json()

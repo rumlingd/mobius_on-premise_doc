@@ -136,7 +136,8 @@ In the example, the image with ID 1260 is the most similar to the query image pr
 
 .. note::
 
-You can control the number of similar images returned by the environment variable SIMILARITY_SEARCH_NUM_RESULTS (use -e option for docker). The default value is set to 10.
+  You can control the number of similar images returned by the environment variable SIMILARITY_SEARCH_NUM_RESULTS (use -e option for docker). The default value is set to 10.
+
 
 .. note::
 

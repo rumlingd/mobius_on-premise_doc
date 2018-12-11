@@ -11,13 +11,13 @@ With this hierarchical understanding, computers can recognize complex objects in
 
 The Mobius Vision on-premise solution is shipped with two base models and a customizable mini-model that is built on top of the base models.
 The reasoning behind this set up is that customization needs far less effort as the base models already include
-lots of knowledge which can be leveraged directly for new objects or styles.
+a large body of knowledge that can be leveraged directly to identify new objects or styles.
 
 
 Object recognition with keywords
 ------------------------------------
 
-Mobius Vision on-premise comes with a model for keywords that the computer can see in a given image.
+|mobvis_image| comes with a model for keywords that the computer can see in a given image.
 Our over 5000 keywords have different levels of granularity. It differs between people and no people but also on a lower level
 between men and women.
 Given one image as an input, the model returns the keywords for the objects it detected with highest confidence.
@@ -32,14 +32,14 @@ there is an object in the given image, but not where.
 Aesthetics evaluation
 -----------------------
 
-The second module that is included in Mobius Vision is a model to evaluate the aesthetics of an image.
+The second module that is included in |mobvis_image| is a model to evaluate the aesthetics of an image.
 
 
-Customizable mini-model
+Customized Training
 ------------------------
 
-One powerful tool that comes with the SDK is a customizable and reusable mini-model.
-It is built on top of our object recognition and aesthetics base models - so it can use their knowledge to understand properties of new objects or styles.
+One powerful tool that comes with the SDK is the customized training, which allows to train a custom and reusable mini-model.
+It is built on top of our object recognition and aesthetics base models - so it can leverage their knowledge to understand properties of new objects or styles.
 
 Optional mobile models porting
 --------------------------------
@@ -50,11 +50,7 @@ The accuracy of these models is slightly lower. If a large speedup is necessary,
 
 Advantages of on-premise installation compared to API service
 ---------------------------------------------------------------
-This set-up has great advantages such as:
 
 * Data privacy by design: the data always stays in your system
 * Security as control over the data flow is kept
 * Fast speed that is not depending on latency
-
-at a moderate cost of:
-* Slightly more difficult installation 

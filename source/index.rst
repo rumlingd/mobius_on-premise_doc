@@ -19,8 +19,8 @@
 
 
 .. toctree::
-  :caption: Image Features
-
+  :caption: Image Modules
+  
   image_about-tech
   image_run_sdk
   image_keywording
@@ -30,7 +30,7 @@
   
 
 .. toctree::
-  :caption: Video Features
+  :caption: Video Modules
   
   video_about-tech
   video_run_sdk

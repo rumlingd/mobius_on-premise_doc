@@ -64,59 +64,29 @@ Below is an example on how to do add multiple samples at the same time using Pyt
 Training
 ------------
 
-To run training send GET request to the following endpoint.
+To run training, you can send a GET request to the following endpoint:
 ::
 
   curl 127.0.0.1:5000/train/<tag>
 
-The request will return json with field task_id that can be used to get status of training:
+The following request will return a json file with field task_id that can be used to get status of training:
 ::
 
   curl 127.0.0.1:5000/status/<task_id>
 
 
-Prediction
-----------
+Prediction from Images
+-----------------------
 
-Prediction from image
-^^^^^^^^^^^^^^^^^^^^^
+Custom model only
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can use general endpoint to get a prediction for custom models.
-::
-
-  curl 127.0.0.1:5000/predict -X POST -F "data=@./your_img.jpg"
-
-Or in python:
-::
-
-  def get_predictions(img):
-     with open(img,'rb') as image:
-         data = {'data': image}
-         pred = requests.post('http://127.0.0.1:5000/predict', files=data).json()
-     return pred
-
-This endpoint will return predictions for base models and for custom models.
-
-Or you can get only prediction for custom models.
-::
-
-  curl 127.0.0.1:5000/predict/custom -X POST -F "data=@./your_img.jpg"
-
-Or in python:
-::
-
-  def get_custom_predictions(img):
-     with open(img,'rb') as image:
-         data = {'data': image}
-         pred = requests.post('http://127.0.0.1:5000/predict/custom', files=data).json()
-     return pred
-
-Or even get prediction only for one model:
+To get the prediction of a custom model with the name 'tag', you can call the following endpoint:
 ::
 
   curl 127.0.0.1:5000/predict/custom/<tag> -X POST -F "data=@./your_img.jpg"
 
-Or in python:
+In python:
 ::
 
   def get_custom_predictions(img, tag):
@@ -125,18 +95,55 @@ Or in python:
          pred = requests.post('http://127.0.0.1:5000/predict/custom/%s'%tag, files=data).json()
      return pred
 
+All custom models
+^^^^^^^^^^^^^^^^^^
 
-Prediction by features
-^^^^^^^^^^^^^^^^^^^^^^
+You can also get predictions for **all** custom models by calling the endpoint:
+::
 
-You can also do prediction using features which is much faster.
+  curl 127.0.0.1:5000/predict/custom -X POST -F "data=@./your_img.jpg"
 
-To extract features use the following endpoint.
+In python:
+::
+
+  def get_custom_predictions(img):
+     with open(img,'rb') as image:
+         data = {'data': image}
+         pred = requests.post('http://127.0.0.1:5000/predict/custom', files=data).json()
+     return pred
+
+All models
+^^^^^^^^^^
+
+Lastly, you can use the general endpoint to get a prediction for all custom models, as well as the base models:
+::
+
+  curl 127.0.0.1:5000/predict -X POST -F "data=@./your_img.jpg"
+
+In python:
+::
+
+  def get_predictions(img):
+     with open(img,'rb') as image:
+         data = {'data': image}
+         pred = requests.post('http://127.0.0.1:5000/predict', files=data).json()
+     return pred
+
+
+Prediction by Features
+----------------------
+
+You can also do prediction using features, which is significantly faster.
+
+Extract features
+^^^^^^^^^^^^^^^^
+
+For this, you first have to extract the features. This can be done by calling the following endpoint:
 ::
 
   curl 127.0.0.1:5000/get_features -X POST -F "data=@./your_img.jpg" --output features.json
 
-And you can do it in python as well.
+In python:
 ::
 
   def get_features(img):
@@ -145,15 +152,16 @@ And you can do it in python as well.
          features = requests.post('http://127.0.0.1:5000/get_features', files=data).json()
      return features
 
-You can save extracted features as you want.
 
+Predict with Features
+^^^^^^^^^^^^^^^^^^^^^
 
-To get predictions from custom models by features use the following endpoint.
+Predictions by features from custom models can be obtained by calling the endpoint:
 ::
 
   curl 127.0.0.1:5000/predict_by_features -X POST -F "data=@./features.json"
 
-And python code.
+In python:
 ::
 
   def get_predictions_by_features(features):
@@ -162,15 +170,10 @@ And python code.
      return pred
 
 
-Backup and restore state
--------------------------
+Load a pretrained custom Model
+------------------------------
 
-To get state of the SDK use the following endpoint.
-::
-
-  curl 127.0.0.1:5000/get_state --output state.tar
-
-To restore internal state of SDK use the following endpoint.
+You can load a pretrained custom model by calling the following endpoint:
 ::
 
   curl 127.0.0.1:5000/set_state -X POST -F "data=@./state.tar"

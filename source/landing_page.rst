@@ -10,7 +10,7 @@ AI powered Computer Vision that lives on the Edge
 
 Empower your product with our pre-trained models.
 Our technology is engineered to work on Linux computers.
-We believe that privacy matters even in the 21st century, and therefore all processing happens on the device locally, and not a cloud.
+We believe that privacy matters even in the 21st century, and therefore all processing happens on the device locally, and not somewhere on a cloud.
 
 Mobius Vision SDK is broadly split into |mobvis_image| and |mobvis_video|.
 

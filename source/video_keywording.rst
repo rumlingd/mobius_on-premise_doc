@@ -111,7 +111,8 @@ Prediction in Python
 The code snipped below shows how prediction can be done in Python.
 
 ::
-    #import time
+
+    import time
     
     def analyze_video(video_path):
          with open(video_path,'rb') as video:
@@ -122,7 +123,7 @@ The code snipped below shows how prediction can be done in Python.
              
              while(msg['status'] is 'ongoing'):
                  msg = requests.get('http://127.0.0.1:5000/status/' + task_id).json()
-                 #time.sleep(1.0)
+                 time.sleep(1.0)
                  
              if(msg['status'] == 'success'):
                 pred = msg['result']

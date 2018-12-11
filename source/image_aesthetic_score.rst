@@ -1,7 +1,7 @@
 Aesthetics
 ===========
 
-Prediction with the aesthetics module works in a similar way to the keywording module.
+Prediction with the aesthetics module works in a similar way to the keywording module. That is, the aesthetic score can be obtained by issuing the followin command:
 ::
 
   curl 127.0.0.1:5000/predict/aesthetic -X POST -F "data=@./your_image.jpg"

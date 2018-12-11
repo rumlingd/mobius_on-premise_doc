@@ -22,7 +22,7 @@ The first step is to add images to the system by sending a POST request to the f
 
   curl 127.0.0.1:5000/similarity/add?image_id=<unique_id> -X POST -F "data=@./your_img.jpg"
 
-where id is an optional argument. Without this argument, the system will generate a random ID number and return it as a response.
+where image_id is an optional argument. Without this argument, the system will generate a random ID number and return it as a response.
 
 .. note::
 
@@ -134,7 +134,10 @@ Example of an output
 
 In the example, the image with ID 1260 is the most similar to the query image provided, with a distance of 349.912.
 
-You can control the number of similar images returned by the environment variable SIMILARITY_SEARCH_NUM_RESULTS (use -e option for docker). The default value is set to 10.
+.. note::
+
+  You can control the number of similar images returned by the environment variable SIMILARITY_SEARCH_NUM_RESULTS (use -e option for docker). The default value is set to 10.
+
 
 .. note::
 
@@ -153,7 +156,7 @@ The first step consists of adding the new images to the image database. This ste
 
   curl 127.0.0.1:5000/similarity/add?image_id=<unique_id> -X POST -F "data=@./your_img.jpg"
 
-where id is an optional argument. Without this argument, the system will generate a random ID number and return it as a response.
+where image_id is an optional argument. Without this argument, the system will generate a random ID number and return it as a response.
 
 Updating the Similarity Search Approximator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

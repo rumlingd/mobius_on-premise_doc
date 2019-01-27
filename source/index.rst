@@ -39,6 +39,7 @@
 .. toctree::
   :caption: Misc
   
+  error_codes
   faq
 
 

@@ -1,4 +1,4 @@
-Status messages
+Troubleshooting
 =================================
 
 The SDK is designed to return status messages to the user.
@@ -50,7 +50,7 @@ General use of SDK
    * - Error code
      - Possible causes
      - Recommended solution
-   * - Exceeds_test_limit
+   * - exceeds_test_limit
      - | Can only appear for test builds of the SDK with restriction
        | on the number of images that can be processed.
      - | Please contact us.
@@ -108,11 +108,11 @@ Similarity search feature
    * - more_samples_required
      - | This feature needs at least 1000 samples to train similarity search
        | in the initial training round.
-     - | Please add more images prioir to training.
+     - | Please add more images prior to training.
    * - updating
      - | The updating process is going on.
      - | Please wait
-   * - duplicate_(image_)id
+   * - duplicate_image_id
      - | Provided image ID is already in use. Can happen if the same image
        | is passed to the add function multiple times.
      - | Please check the image IDs for uniqueness and remove duplicates.

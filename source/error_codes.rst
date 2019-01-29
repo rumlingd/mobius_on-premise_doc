@@ -16,7 +16,7 @@ System set-up
    :widths: 25 25 50
    :header-rows: 1
 
-   * - Error code
+   * - Status message
      - | Possible causes
      - | Recommended solution
    * - invalid_signature
@@ -47,7 +47,7 @@ General use of SDK
    :widths: 25 25 50
    :header-rows: 1
 
-   * - Error code
+   * - Status message
      - Possible causes
      - Recommended solution
    * - exceeds_test_limit
@@ -72,7 +72,7 @@ General use of SDK
      - | Please follow instructions for predicting on features
        | from the documentation. Verify correctness of storing and passing features.
    * - training
-     - | training is going on (similarity search or custom model training).
+     - | Training is going on (similarity search or custom model training).
        | This is the message for status 'ongoing'.
      - | Please wait for training to complete.
    * - file_saving_error
@@ -96,7 +96,7 @@ Similarity search feature
    :widths: 25 25 50
    :header-rows: 1
 
-   * - Error code
+   * - Status message
      - Possible causes
      - Recommended solution
    * - index_loading_error
@@ -125,7 +125,7 @@ Custom model training
    :widths: 25 25 50
    :header-rows: 1
 
-   * - Error code
+   * - Status message
      - Possible causes
      - Recommended solution
    * - unknown_custom_model

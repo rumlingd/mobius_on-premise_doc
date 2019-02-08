@@ -22,7 +22,7 @@ def setup(app):
 # -- Project information -----------------------------------------------------
 
 project = 'mobius_on-premise_doc'
-copyright = '2018, Isabel'
+copyright = '2018, Mobius Labs'
 author = 'Isabel'
 
 # The short X.Y version
@@ -93,6 +93,7 @@ html_theme = "sphinx_rtd_theme"
 #
 html_theme_options = {}
 
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -107,6 +108,7 @@ html_static_path = ['_static']
 # 'searchbox.html']``.
 #
 # html_sidebars = {}
+html_sidebars = { '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'] }
 
 
 # -- Options for HTMLHelp output ---------------------------------------------
@@ -173,6 +175,10 @@ todo_include_todos = True
 
 rst_prolog = """
     .. |prod_name| replace:: Mobius on-premise software
+    .. |mobvis_image| replace:: *Mobius Vision Image SDK*
+    .. |mobvis_video| replace:: *Mobius Vision Video SDK*
+    .. |lightweight_model| replace:: lightweight
+    .. |performance_model| replace:: performance
     .. highlight:: python
     .. role:: python(code)
         :language: python

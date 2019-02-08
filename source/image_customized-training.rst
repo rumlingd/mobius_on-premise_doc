@@ -22,11 +22,15 @@ To add images to SDK send POST request to the following endpoint.
 
   curl 127.0.0.1:5000/add/<type>/<tag> -X POST -F "data=@./your_img.jpg"
 
-where type is type of the sample (positive or negative) and tag is name of the custom tag.
+where type is type of the sample (can be only either 'positive' or 'negative') and tag is name of the custom tag.
+
+.. note::
+
+
 
 Below is an example on how to do add multiple samples at the same time using Python.
-::    
-    
+::
+
     from multiprocessing import Pool
     import requests
     import os
@@ -38,12 +42,12 @@ Below is an example on how to do add multiple samples at the same time using Pyt
         data = {'data': image}
         r = requests.post('http://127.0.0.1:5000/add/%s/%s'%(sample_type, tag), files=data).json()
       return r
-      
 
-    """ 
+
+    """
     This example shows how to add positive and negative samples to the customized training. In the example, we want to train a
-    #filter for people. Hence, the positive samples are all the images with people; the negative samples will be the other images. 
-    """ 
+    #filter for people. Hence, the positive samples are all the images with people; the negative samples will be the other images.
+    """
     path_to_positives = '/your_image_folder/Positives/' #Put positive samples in here
     path_to_negatives = '/your_image_folder/Negatives/' #Put negative samples in here
     tag = 'people' #Tag used for the filter

@@ -26,6 +26,7 @@ For some simple images, the keywording module might only recognise a small numbe
 However, in cluttered scenes, there might be a long list of matching keywords.
 
 There is an additional request argument `top_k` to obtain the highest scored `k` keywords.
+In this mode, the number of keywords is fixed then.
 ::
 
   curl 127.0.0.1:5000/predict/concepts?top_k=10 -X POST -F "data=@./your_image.jpg"
@@ -34,10 +35,11 @@ There is an additional request argument `top_k` to obtain the highest scored `k`
 Prediction with large number of images
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Please note that prediction is time consuming. It's recommended to run predictions
+Please note that prediction calls are time consuming. It's recommended to run predictions
 in parallel.
 
 Here is an example how to use multiprocessing in python to speed things up:
+
 ::
 
   from multiprocessing import Pool

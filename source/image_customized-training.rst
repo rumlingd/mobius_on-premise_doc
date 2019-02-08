@@ -44,10 +44,12 @@ Below is an example on how to do add multiple samples at the same time using Pyt
       return r
 
 
-    """
-    This example shows how to add positive and negative samples to the customized training. In the example, we want to train a
-    #filter for people. Hence, the positive samples are all the images with people; the negative samples will be the other images.
-    """
+
+This example shows how to add positive and negative samples to the customized training. In the example, we want to train a
+#filter for people. Hence, the positive samples are all the images with people; the negative samples will be the other images.
+
+::
+
     path_to_positives = '/your_image_folder/Positives/' #Put positive samples in here
     path_to_negatives = '/your_image_folder/Negatives/' #Put negative samples in here
     tag = 'people' #Tag used for the filter

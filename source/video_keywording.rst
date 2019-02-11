@@ -10,7 +10,7 @@ In the following, we show an example of how to do prediction of keywords and/or 
 First, we need to send the video to the demo server for analysis.
 ::
 
-  curl http://webdemo.mobius.ml/test_api/video/tag?MOBIUS_KEY=<your_key> -X POST -F "data=@./your_video.mp4"
+  curl "http://webdemo.mobius.ml/test_api/video/tag?MOBIUS_KEY=<your_key>" -X POST -F "data=@./your_video.mp4"
 
 The above command will return an information message:
 ::
@@ -23,7 +23,7 @@ Depending on various factors, including duration and resolution of the video, bu
 With the following command, you can check the status of the process at any time. 
 ::
   
-  curl http://webdemo.mobius.ml/test_api/status/<task_id>?MOBIUS_KEY=<your_key>
+  curl "http://webdemo.mobius.ml/test_api/status/<task_id>?MOBIUS_KEY=<your_key>"
   
 where you would replace <task_id> with 599600ef-817f-413e-85f5-d4fc55313164 in the example above. 
 
@@ -74,7 +74,7 @@ Arguments
 Depending on the features that have been bought, there are a number of arguments that can be passed. The arguments can be passed by adding a "?" after the tag command, followed by the argument=value. Several arguments are separated using the "&". The following example illustrates this:
 ::
   
-  curl http://webdemo.mobius.ml/test_api/video/tag?MOBIUS_KEY=<your_key>&keyword_threshold=0.6&action_threshold=0.7 -X POST -F "data=@./your_video.mp4"
+  curl "http://webdemo.mobius.ml/test_api/video/tag?MOBIUS_KEY=<your_key>&keyword_threshold=0.6&action_threshold=0.7" -X POST -F "data=@./your_video.mp4"
   
 Below is list of the different arguments that can be set, together with their default values.
 

@@ -6,7 +6,7 @@ Mobius Vision SDK provides a powerful similarity search. Our test API is limited
 Similarity search with a query image can be used with the following endpoint:
 ::
 
-  curl http://webdemo.mobius.ml/test_api/predict/similarity_search?MOBIUS_KEY=<your_key> -X POST -F "data=@./your_query_img.jpg"
+  curl "http://webdemo.mobius.ml/test_api/predict/similarity_search?MOBIUS_KEY=<your_key>" -X POST -F "data=@./your_query_img.jpg"
 
 Or using this call from a python script:
 ::

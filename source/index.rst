@@ -15,14 +15,13 @@
   :caption: Overview
   
   landing_page
-  installation
+  getting_started
 
 
 .. toctree::
   :caption: Image Modules
   
   image_about-tech
-  image_run_sdk
   image_keywording
   image_aesthetic_score
   image_customized-training
@@ -33,7 +32,6 @@
   :caption: Video Modules
   
   video_about-tech
-  video_run_sdk
   video_keywording
   
 .. toctree::

@@ -8,35 +8,32 @@ The status can be either 'ok', 'error' or 'ongoing' to indicate the status of th
 Messages are generally shown in the cases of errors or ongoing processing only.
 
 
-System set-up
-----------------
+The Mobius key
+--------------
 
 
-.. list-table:: Status messages in the context of system set-up
+.. list-table:: Status messages that appear because of thr problems with key.
    :widths: 25 25 50
    :header-rows: 1
 
    * - Status message
      - | Possible causes
      - | Recommended solution
-   * - invalid_signature
-     - | Various causes possible such as some issue with our token server.
-     - | Please contact us.
-   * - token_server_connection_error
-     - | System can't connect to token verification server.
-       | Can happen if the Mobius Labs token server is offline.
-     - | Please check internet connection from inside docker
-       | or contact us if problem persists.
-   * - token_verification_error
-     - | Unexpected error happened in process of token verification
-     - | Please check your token and the connection
-       | to the internet from within the docker container.
-   * - expired_token
-     - | Provided token is expired.
-     - | Please contact us.
-   * - unknown_token
-     - | Token is not registered in our token verification system
-     - | Please check your token.
+   * - unknown_key
+     - | Provided key is not registered in the system.
+     - | Please make sure that the key is typed right and/or contact our sales team by e-mail sales@mobius.ml.
+   * - expired_key
+     - | Provided key is expired.
+     - | Please contact our sales team by e-mail sales@mobius.ml.
+   * - no_key_provided
+     - | The argument `MOBIUS_KEY` is missing.
+     - | Please add a `?MOBIUS_KEY=<your_key>` after the command.
+   * - exceeds_test_limit
+     - | The limit for the feature is exceeded.
+     - | Please contact our sales team by e-mail sales@mobius.ml.
+   * - disabled_feature
+     - | The feature is disabled for your key.
+     - | Please contact our sales team by e-mail sales@mobius.ml.
 
 
 

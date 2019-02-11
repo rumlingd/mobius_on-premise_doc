@@ -7,10 +7,10 @@ Getting started
 
 In the following, we show an example of how to do prediction of keywords and/or actions on videos. In the example, both the keywording and the action recognition feature are enabled. If you only have either one of the tagging features, you can still run this code, but your output will be different.
 
-First, we need to send the video to the (local) vision server for analysis.
+First, we need to send the video to the demo server for analysis.
 ::
 
-  curl 127.0.0.1:5000/video/tag -X POST -F "data=@./your_video.mp4"
+  curl http://webdemo.mobius.ml/test_api/video/tag?MOBIUS_KEY=<your_key> -X POST -F "data=@./your_video.mp4"
 
 The above command will return an information message:
 ::
@@ -23,7 +23,7 @@ Depending on various factors, including duration and resolution of the video, bu
 With the following command, you can check the status of the process at any time. 
 ::
   
-  curl 127.0.0.1:5000/status/<task_id>
+  curl http://webdemo.mobius.ml/test_api/status/<task_id>?MOBIUS_KEY=<your_key>
   
 where you would replace <task_id> with 599600ef-817f-413e-85f5-d4fc55313164 in the example above. 
 
@@ -35,10 +35,29 @@ If the video is still being processed, the status message will be:
 When the processing is finished, the status message will contain the keywording results (static and/or actions, depending on your licence):
 ::
   
-  {"status": "success", "result": [{"keywords": [["people", 0.9846186637878418], 
-  ["adult", 0.7601927518844604], ["indoors", 0.717658519744873], ...], 
-  "time_stamps": [0.0, 19.333333333333332], 
-  "actions": [["painting", 0.8850449323654175]]}]}
+  {  
+    "status":"success",
+    "video_level":{  
+        "actions":[  
+          ["playing instrument", 1.0]
+        ],
+        "concepts":[  
+          ["musical instrument", 1.0], ["people", 1.0], ["text", 1.0], ...
+        ]
+    },
+    "segment_level":[  
+        {  
+          "timestamp":[0.0, 22.6666],
+          "actions":[  
+              ["playing instrument", 0.9999]
+          ],
+          "concepts":[  
+              ["music", 0.9995], ["people", 0.9990], ["percussion instrument", 0.9976], ...
+          ]
+        }
+    ]
+  }
+
 
 All keywords with a confidence above a certain threshold are returned (0.5 by default).
 
@@ -55,7 +74,7 @@ Arguments
 Depending on the features that have been bought, there are a number of arguments that can be passed. The arguments can be passed by adding a "?" after the tag command, followed by the argument=value. Several arguments are separated using the "&". The following example illustrates this:
 ::
   
-  curl 127.0.0.1:5000/video/tag?keyword_threshold=0.6&action_threshold=0.7 -X POST -F "data=@./your_video.mp4"
+  curl http://webdemo.mobius.ml/test_api/video/tag?MOBIUS_KEY=<your_key>&keyword_threshold=0.6&action_threshold=0.7 -X POST -F "data=@./your_video.mp4"
   
 Below is list of the different arguments that can be set, together with their default values.
 
@@ -89,20 +108,6 @@ Furthermore, an optional argument can be used to specify a fixed video tagging i
 .. note::
   
   If *fixed_segment_length* is set, the shot detector is disabled.
-
-
-Error messages
----------------
-
-If there is an error on one of the input arguments, the following status message will be returned:
-::
-  
-  {'status': 'error', 'message': 'wrong_arguments_format', 'arg': 'keyword_topk'}
-  
-If the video format is not supported, the status message is:
-::
-  
-  {'status': 'error', 'message': 'video_reading_error'}
   
 
 Prediction in Python
@@ -117,12 +122,12 @@ The code snipped below shows how prediction can be done in Python.
     def analyze_video(video_path):
          with open(video_path,'rb') as video:
              data = {'data': video}
-             res = requests.post('http://127.0.0.1:5000/video/tag', files=data).json()
+             res = requests.post('http://webdemo.mobius.ml/test_api/video/tag?MOBIUS_KEY=<your_key>', files=data).json()
              task_id = res['task_id']
-             msg = requests.get('http://127.0.0.1:5000/status/' + task_id).json()
+             msg = requests.get('http://webdemo.mobius.ml/test_api/status/' + task_id + '?MOBIUS_KEY=<your_key>').json()
              
-             while(msg['status'] is 'ongoing'):
-                 msg = requests.get('http://127.0.0.1:5000/status/' + task_id).json()
+             while(msg['status'] == 'ongoing'):
+                 msg = requests.get('http://webdemo.mobius.ml/test_api/status/' + task_id + '?MOBIUS_KEY=<your_key>').json()
                  time.sleep(1.0)
                  
              if(msg['status'] == 'success'):

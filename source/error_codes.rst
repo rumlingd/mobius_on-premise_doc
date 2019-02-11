@@ -136,3 +136,21 @@ Custom model training
    * - training_error
      - | Multiple possible causes. Fallback error to prevent exceptions
      - | Please send us the traceback and exception fields of the response.
+
+
+Video tagging
+------------------------
+
+.. list-table:: Status messages that only appear when using video features
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Status message
+     - Possible causes
+     - Recommended solution
+   * - wrong_arguments_format
+     - | The argument in `arg` has wrong format.
+     - | Please check format of the argument.
+   * - video_reading_error
+     - | The video format is not supported.
+     - | Please send the video in one of supported formats.

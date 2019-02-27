@@ -3,12 +3,12 @@
 Getting started
 ==================
 
-All you need in order to use our test API is the Mobius Key. To get the key contact our sales team by e-mail sales@mobius.ml.
+All you need in order to use our test API is the Mobius Key. To get the key please contact our sales team by sending an e-mail to sales@mobius.ml.
 
 The Mobius Key
 --------------
 
-The Mobius Key have to be passed as an argument by adding a `?MOBIUS_KEY=<your_key>` after the command.
+The Mobius Key has to be passed as an argument by adding a `?MOBIUS_KEY=<your_key>` after a command.
 
 For example:
 ::
@@ -17,4 +17,4 @@ For example:
         -X POST -F "data=@./your_image.jpg"
 
 
-In case of error message please visit troubleshooting section.
+In case that an error message is returned, please visit the troubleshooting section.

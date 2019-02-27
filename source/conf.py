@@ -110,6 +110,10 @@ html_static_path = ['_static']
 # html_sidebars = {}
 html_sidebars = { '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'] }
 
+# The name of an image file (within the static path) to use as favicon of the
+# docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+# pixels large.
+html_favicon = "data/manifest_icon.png"
 
 # -- Options for HTMLHelp output ---------------------------------------------
 

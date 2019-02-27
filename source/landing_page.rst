@@ -10,7 +10,7 @@ AI powered Computer Vision that lives on the Edge
 
 Empower your product with our pre-trained models and customize the models according to the use case.
 This Computer Vision technology is engineered to work on GPUs with a Linux operating system.
-We believe that privacy matters even in the 21st century, and therefore all processing happens on the device locally, and not somewhere on cloud servers.
+We believe that privacy matters even in the 21st century, and therefore our main product is only available as SDK to be installed directly in the client's infrastructure. However, to facilitate testing, we offer this easy-to-use test API. 
 
 Mobius Vision SDK is broadly split into |mobvis_image| and |mobvis_video|.
 
@@ -18,8 +18,8 @@ Mobius Vision SDK is broadly split into |mobvis_image| and |mobvis_video|.
 
 * Keywording module: Tag images with more than 5000 general keywords
 * Aesthetics module: Estimate image aesthetics (based on data from professional curators)
-* Customization module: Add custom keywords and/or style allowing everyone to retrain our models to fit to specific needs
-* Similarity Search: Find similar looking images by providing a reference image
+* Customization module: Test already retrained models fit to your specific needs
+* Similarity Search: Find similar looking images in an open database by providing a reference image
 
 |mobvis_video| currently contains the following modules:
 

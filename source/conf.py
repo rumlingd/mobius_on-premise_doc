@@ -116,6 +116,10 @@ html_sidebars = { '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'mobius_on-premise'
 
+# The name of an image file (within the static path) to use as favicon of the
+# docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+# pixels large.
+html_favicon = "data/manifest_icon.png"
 
 # -- Options for LaTeX output ------------------------------------------------
 

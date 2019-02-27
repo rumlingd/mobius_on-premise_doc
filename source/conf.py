@@ -22,7 +22,7 @@ def setup(app):
 # -- Project information -----------------------------------------------------
 
 project = 'mobius_on-premise_doc'
-copyright = '2018, Mobius Labs'
+copyright = '2018 -- 2019, Mobius Labs'
 author = 'Isabel'
 
 # The short X.Y version

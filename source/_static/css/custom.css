@@ -6,3 +6,24 @@ div.rst-versions > div.rst-other-versions > div.injected > dl:nth-child(4) {
 .wy-nav-content {
 max-width: 1000px !important;
 }
+
+
+{% extends "!layout.html" %}
+  {% block footer %} {{ super() }}
+
+  <style>
+    /* topbar for mobile */
+    .wy-nav-top {
+      background: #21d19e;
+    }
+    /* Sidebar header */
+    .wy-side-nav-search {
+      background: #21d19e;
+    }
+
+    /* Sidebar */
+    /*.wy-nav-side {
+      background: #ffffff;
+    }*/
+  </style>
+{% endblock %}

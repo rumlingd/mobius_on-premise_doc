@@ -183,3 +183,79 @@ You can load a pretrained custom model by calling the following endpoint:
 ::
 
   curl 127.0.0.1:5000/set_state -X POST -F "data=@./state.tar"
+
+
+Caching system
+--------------
+
+To prevent from uploading the same images multiple time for multiple models one can use caching system.
+
+There are two steps at using caching system:
+
+1. Add image to caching system.
+
+2. Assign cached image to custom model or use cached image to get prediction for custom model.
+
+Adding image to cache
+^^^^^^^^^^^^^^^^^^^^^
+
+To add image to caching system, you can send a POST request to the following endpoint:
+::
+
+  curl 127.0.0.1:5000/add?image_id=<image_id> -X POST -F "data=@./your_img.jpg"
+  
+where image_id is an optional argument. Without this argument, the system will generate a random ID number and return it as a response.
+
+In python:
+::
+
+  def add_sample_to_cache(img, image_id=None):
+      with open(img,'rb') as image:
+          data = {'data': image}
+          url = 'http://127.0.0.1:5000/add'
+          if image_id:
+              url += '?image_id=' + image_id
+          r = requests.post(url, files=data).json()
+      return r
+
+Assigning cached image
+^^^^^^^^^^^^^^^^^^^^^^
+
+To assign cached image to custom model, send a GET request to the same endpoint:
+::
+
+  curl 127.0.0.1:5000/add?image_id=<image_id>
+
+where image_id is ID that you got on previous step.
+
+In python:
+::
+
+  def assign_cached_image(sample_type, tag, image_id):
+      url = 'http://127.0.0.1:5000/add/%s/%s?image_id='%(sample_type, tag, image_id)
+      r = requests.get(url).json()
+      return r
+
+
+Prediction on cached image
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To get custom models predictions for cached image, send a GET request to the following endpoint:
+::
+
+  curl 127.0.0.1:5000/predict/custom?image_id=<image_id>
+
+Or you can get prediction one for one custom model:
+::
+
+  curl 127.0.0.1:5000/predict/custom/<tag>?image_id=<image_id>
+
+In python:
+::
+
+  def get_predictions_cached(image_id, tag=None):
+      if tag is None:
+          pred = requests.get('http://127.0.0.1:5000/predict/custom?image_id=%s'%(image_id)).json()
+      else:
+          pred = requests.get('http://127.0.0.1:5000/predict/custom/%s?image_id=%s'%(tag, image_id)).json()
+      return pred

@@ -139,3 +139,7 @@ Custom model training
    * - training_error
      - | Multiple possible causes. Fallback error to prevent exceptions
      - | Please send us the traceback and exception fields of the response.
+   * - duplicate_image_id
+     - | Provided image ID is already in use. Can happen if the same image
+       | is passed to the add function multiple times.
+     - | Please check the image IDs for uniqueness and remove duplicates.

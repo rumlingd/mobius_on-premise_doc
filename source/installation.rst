@@ -13,44 +13,50 @@ Requirements for the Mobius On-Premise SDK
 
 In order to run the Mobius Vision On-Premise SDK, the following software requirements have to be met:
 
-*   CUDA 9+ (requires a GPU)
-*   Python 2.7
-*   ffmpeg 2.8.15 (only for |mobvis_video|)
+*   Nvidia Drivers >= 396.37 (for GPU version)
+*   docker >= 1.12
+*   nvidia-docker2 (for GPU version)
 
 
-Installation from docker image
--------------------------------
+Docker Installation
+-------------------
 
-1. First, you need to install nvidia-docker2. If nvidia-docker2 are installed already then you can skip this step and jump to step 2.
+To use GPU versions of Mobius Vision SDK you need to have nvidia-docker2. You can install it by instructions from https://github.com/NVIDIA/nvidia-docker or our instructions.
 
-  1.1 Install Docker CE:
-  https://docs.docker.com/install/linux/docker-ce/ubuntu/
+If nvidia-docker2 are installed already then you can skip this step.
 
-
-  1.2. Add nvidia-docker repo to apt, as explained here:
-    https://nvidia.github.io/nvidia-docker/
-
-  1.3. Install the nvidia-docker2 package and reload the Docker daemon configuration
-  ::
-
-    sudo apt-get install nvidia-docker2
-    sudo pkill -SIGHUP dockerd
-
-  1.4. Add your user to the docker group.
-  ::
-
-    sudo usermod -aG docker $USER
-
-  1.5. Log out and log back in so that your group membership is re-evaluated.
+1. Install Docker CE:
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 
-2. Load Mobius Vision docker image
+2. Add nvidia-docker repo to apt, as explained here:
+  https://nvidia.github.io/nvidia-docker/
+
+3. Install the nvidia-docker2 package and reload the Docker daemon configuration
 ::
 
-  docker load --input mobius_vision.tar
+  sudo apt-get install nvidia-docker2
+  sudo pkill -SIGHUP dockerd
+
+4. Add your user to the docker group.
+::
+
+  sudo usermod -aG docker $USER
+
+5. Log out and log back in so that your group membership is re-evaluated.
 
 
-3. To check that image was loaded sucessfully run following command
+Mobius Vision Installation
+--------------------------
+
+1. Build Mobius Vision docker image
+::
+
+  unzip mobius_sdk.zip
+  cd mobius_sdk
+  nvidia-docker build -t mobius_labs/mobius_sdk:latest -f Dockerfile .
+
+3. To check that image was built sucessfully run following command
 ::
 
   docker images
@@ -58,8 +64,7 @@ Installation from docker image
 You should see something like this
 ::
 
-  REPOSITORY TAG IMAGE ID CREATED SIZE
-  mobius_labs/mobius_sdk 0.1 ef8d42276b3f 18 minutes ago 6GB
-
+  REPOSITORY               TAG           IMAGE ID            CREATED             SIZE
+  mobius_labs/mobius_sdk   latest        d4a9c41f3496        32 minutes ago      6.69GB
 
 Now you are ready to run the SDK.

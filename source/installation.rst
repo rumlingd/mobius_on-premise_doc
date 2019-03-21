@@ -4,8 +4,7 @@ Installation
 ==================
 
 Before you can use the Mobius On-Premise SDK, you have to follow a few steps as explained here.
-There are two ways of installation: wheel package and docker image. The docker image is very easy to install, but is around 6GB (for the GPU version).
-The wheel package requires a few more steps to be installed, but is only around 400 MB. By default we provide a docker container. Therefore, our instructions focus on this set-up.
+We provide our solution as a combination of a python package (wheel) and dockerfile. Using the Dockerfile allows to build a docker image with everything you need to run the Mobius Vision SDK.
 
 
 Requirements for the Mobius On-Premise SDK
@@ -17,13 +16,14 @@ In order to run the Mobius Vision On-Premise SDK, the following software require
 *   docker >= 1.12
 *   nvidia-docker2 (for GPU version)
 
+We also offer a CPU version. Please let us know if you are interested in the specific requirements for that version. 
 
 Docker Installation
 -------------------
 
 To use GPU versions of Mobius Vision SDK you need to have nvidia-docker2. You can install it by instructions from https://github.com/NVIDIA/nvidia-docker or our instructions.
 
-If nvidia-docker2 are installed already then you can skip this step.
+If nvidia-docker2 is installed already then you can skip this step.
 
 1. Install Docker CE:
 https://docs.docker.com/install/linux/docker-ce/ubuntu/

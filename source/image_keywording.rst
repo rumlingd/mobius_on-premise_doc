@@ -25,7 +25,13 @@ All keywords with a confidence above a certain threshold are returned.
 For some simple images, the keywording module might only recognise a small number of matching keywords.
 However, in cluttered scenes, there might be a long list of matching keywords.
 
-There is an additional request argument `top_k` to obtain the highest scored `k` keywords.
+There are few additional request arguments:
+* *top_k*: Flag to obtain the highest scored `k` keywords
+* *keyword_threshold* (default *0.55*): Threshold on the confidence of keyword predictions
+* *hierarchical_output* (default *true*): Flag to signal if keywords should be grouped by category 
+
+
+`top_k` 
 In this mode, the number of keywords is fixed then.
 ::
 

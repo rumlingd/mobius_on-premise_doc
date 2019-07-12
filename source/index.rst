@@ -35,6 +35,7 @@
   video_about-tech
   video_run_sdk
   video_keywording
+  video_highlighting
   
 .. toctree::
   :caption: Misc

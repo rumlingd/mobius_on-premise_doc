@@ -84,20 +84,6 @@ Furthermore, an optional argument can be used to specify a fixed video tagging i
 .. note::
   
     If *fixed_segment_length* is set, the shot detector is disabled.
-
-
-Error messages
----------------
-
-If there is an error on one of the input arguments, the following status message will be returned:
-::
-  
-  {'status': 'error', 'message': 'wrong_arguments_format', 'arg': 'keyword_topk'}
-  
-If the video format is not supported, the status message is:
-::
-  
-  {'status': 'error', 'message': 'video_reading_error'}
   
 
 Prediction in Python

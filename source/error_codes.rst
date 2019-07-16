@@ -1,4 +1,4 @@
-Troubleshooting
+Status Messages
 =================================
 
 The SDK is designed to return status messages to the user.
@@ -11,14 +11,13 @@ Messages are generally shown in the cases of errors or ongoing processing only.
 System set-up
 ----------------
 
-
 .. list-table:: Status messages in the context of system set-up
    :widths: 25 25 50
    :header-rows: 1
 
    * - Status message
-     - | Possible causes
-     - | Recommended solution
+     - Possible causes
+     - Recommended solution
    * - invalid_signature
      - | Various causes possible such as some issue with our token server.
      - | Please contact us.
@@ -37,7 +36,6 @@ System set-up
    * - unknown_token
      - | Token is not registered in our token verification system
      - | Please check your token.
-
 
 
 General use of SDK
@@ -86,7 +84,6 @@ General use of SDK
    * - unknown_error
      - | Something unexpected happened. Catch-all error message.
      - | Please send us the traceback and exception fields of the response.
-
 
 
 Similarity search feature
@@ -143,3 +140,18 @@ Custom model training
      - | Provided image ID is already in use. Can happen if the same image
        | is passed to the add function multiple times.
      - | Please check the image IDs for uniqueness and remove duplicates.
+     
+     
+Video-Specific
+------------------------
+
+.. list-table:: Status messages that are specific to video content
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Status message
+     - Possible causes
+     - Recommended solution
+   * - video_reading_error
+     - | Video codec/extension is not supported.
+     - | Our SDK uses ffmpeg as backbone, so please make sure that your video is supported by ffmpeg.
